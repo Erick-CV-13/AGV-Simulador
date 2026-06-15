@@ -3,11 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Simulador de Colisiones — Robótica de Almacén</title>
+  <title>AGVSim — Simulador de Colisiones Robótica de Almacén</title>
   <link rel="stylesheet" href="src/ui/styles.css" />
 </head>
 <body>
   <div id="app">
+
     <!-- HEADER -->
     <header id="header">
       <div class="header-left">
@@ -22,8 +23,8 @@
       </div>
       <div class="header-center">
         <div class="controls">
-          <button id="btn-play" class="btn-ctrl primary" title="Play/Pause (Espacio)">▶</button>
-          <button id="btn-step" class="btn-ctrl" title="Avanzar 1 frame (F)">⏭</button>
+          <button id="btn-play"  class="btn-ctrl primary" title="Play/Pause (Espacio)">▶</button>
+          <button id="btn-step"  class="btn-ctrl" title="Avanzar 1 frame (F)">⏭</button>
           <button id="btn-reset" class="btn-ctrl" title="Reiniciar (R)">↺</button>
           <div class="speed-group">
             <label>Vel.</label>
@@ -42,9 +43,7 @@
           <span id="fps-value">60</span>
           <span class="fps-label">FPS</span>
         </div>
-        <div class="frame-counter">
-          Frame: <span id="frame-value">0</span>
-        </div>
+        <div class="frame-counter">Frame: <span id="frame-value">0</span></div>
       </div>
     </header>
 
@@ -54,7 +53,7 @@
       <!-- LEFT PANEL -->
       <aside id="left-panel">
 
-        <!-- MAP CONFIG -->
+        <!-- MAPA -->
         <section class="panel-section">
           <h3 class="section-title">🗺 Mapa</h3>
           <div class="input-row">
@@ -70,17 +69,17 @@
             <label>Escala (m/px)</label>
             <input type="number" id="map-scale" value="0.05" step="0.01" min="0.01" />
           </div>
-          <button id="btn-gen-map" class="btn-secondary full">Generar mapa de prueba</button>
+          <button id="btn-gen-map"   class="btn-secondary full">Generar mapa de prueba</button>
           <button id="btn-clear-obs" class="btn-secondary full">Limpiar obstáculos</button>
           <div class="tool-row">
             <span class="tool-label">Herramienta:</span>
-            <button id="tool-draw" class="btn-tool active" title="Dibujar obstáculos">✏</button>
+            <button id="tool-draw"  class="btn-tool active" title="Dibujar obstáculos">✏</button>
             <button id="tool-erase" class="btn-tool" title="Borrar obstáculos">⌫</button>
             <input type="range" id="brush-size" min="1" max="20" value="5" title="Tamaño pincel" />
           </div>
         </section>
 
-        <!-- FLEET CONFIG -->
+        <!-- FLOTA -->
         <section class="panel-section">
           <h3 class="section-title">🤖 Flota</h3>
           <div class="input-row">
@@ -101,25 +100,25 @@
             <button class="btn-template" data-n="20">20</button>
             <button class="btn-template" data-n="50">50</button>
           </div>
-          <button id="btn-spawn" class="btn-primary full">Generar flota</button>
+          <button id="btn-spawn"       class="btn-primary full">Generar flota</button>
           <button id="btn-assign-dest" class="btn-secondary full">Asignar destinos aleatorios</button>
         </section>
 
-        <!-- VISUALIZATION LAYERS -->
+        <!-- CAPAS VISUALES -->
         <section class="panel-section">
           <h3 class="section-title">👁 Capas visuales</h3>
-          <label class="toggle-row"><input type="checkbox" id="show-aabb" checked /> Mostrar AABB</label>
-          <label class="toggle-row"><input type="checkbox" id="show-obb" checked /> Mostrar OBB</label>
-          <label class="toggle-row"><input type="checkbox" id="show-rays" checked /> Mostrar rayos</label>
-          <label class="toggle-row"><input type="checkbox" id="show-paths" checked /> Mostrar rutas A*</label>
+          <label class="toggle-row"><input type="checkbox" id="show-aabb"    checked /> Mostrar AABB</label>
+          <label class="toggle-row"><input type="checkbox" id="show-obb"     checked /> Mostrar OBB</label>
+          <label class="toggle-row"><input type="checkbox" id="show-rays"    checked /> Mostrar rayos</label>
+          <label class="toggle-row"><input type="checkbox" id="show-paths"   checked /> Mostrar rutas A*</label>
           <label class="toggle-row"><input type="checkbox" id="show-splines" checked /> Mostrar splines</label>
-          <label class="toggle-row"><input type="checkbox" id="show-grid" /> Mostrar grid espacial</label>
-          <label class="toggle-row"><input type="checkbox" id="show-frustum" /> Mostrar frustum</label>
-          <label class="toggle-row"><input type="checkbox" id="show-mtv" checked /> Mostrar MTV</label>
-          <label class="toggle-row"><input type="checkbox" id="show-matrix" /> Panel de matrices</label>
+          <label class="toggle-row"><input type="checkbox" id="show-grid"           /> Mostrar grid espacial</label>
+          <label class="toggle-row"><input type="checkbox" id="show-frustum"        /> Mostrar frustum</label>
+          <label class="toggle-row"><input type="checkbox" id="show-mtv"     checked /> Mostrar MTV</label>
+          <label class="toggle-row"><input type="checkbox" id="show-matrix"         /> Panel de matrices</label>
         </section>
 
-        <!-- ALGORITHM PARAMS -->
+        <!-- PARÁMETROS -->
         <section class="panel-section">
           <h3 class="section-title">⚙ Parámetros</h3>
           <div class="input-row">
@@ -144,11 +143,11 @@
             <input type="range" id="frustum-margin" min="0" max="200" value="50" />
             <span id="frustum-margin-val">50px</span>
           </div>
-          <label class="toggle-row"><input type="checkbox" id="use-spatial-grid" checked /> Grid espacial</label>
+          <label class="toggle-row"><input type="checkbox" id="use-spatial-grid"    checked /> Grid espacial</label>
           <label class="toggle-row"><input type="checkbox" id="use-frustum-culling" checked /> Frustum culling</label>
         </section>
 
-        <!-- CHAOS MODE -->
+        <!-- MODO CAOS -->
         <section class="panel-section chaos-section">
           <h3 class="section-title">💥 Modo Caos</h3>
           <div class="input-row">
@@ -163,6 +162,8 @@
 
       <!-- CANVAS AREA -->
       <div id="canvas-area">
+
+        <!-- VIEWPORTS: layout-1 | layout-2 | layout-4 -->
         <div id="viewport-container" class="layout-1">
           <div class="viewport-panel" id="vp-main">
             <div class="vp-label">Vista Global</div>
@@ -173,14 +174,16 @@
             <canvas id="canvas-secondary"></canvas>
           </div>
           <div class="viewport-panel hidden" id="vp-third">
-            <div class="vp-label">Vista Zoom</div>
+            <div class="vp-label">Vista Overview</div>
             <canvas id="canvas-third"></canvas>
           </div>
           <div class="viewport-panel hidden" id="vp-fourth">
-            <div class="vp-label">Vista Métricas</div>
+            <div class="vp-label">Métricas</div>
             <canvas id="canvas-fourth"></canvas>
           </div>
         </div>
+
+        <!-- BARRA INFERIOR DE CONTROLES DE VIEWPORT -->
         <div id="viewport-controls">
           <button id="btn-vp-1" class="btn-vp active">1 Vista</button>
           <button id="btn-vp-2" class="btn-vp">2 Vistas</button>
@@ -190,15 +193,16 @@
           <span id="astar-step-info" class="step-info"></span>
           <div class="vp-divider"></div>
           <span class="step-info">Sim: <span id="sim-time-display">0.0s</span></span>
-          <button id="btn-export-png" class="btn-secondary">📷 PNG</button>
+          <button id="btn-export-png"    class="btn-secondary">📷 PNG</button>
           <button id="btn-export-config" class="btn-secondary">💾 JSON</button>
         </div>
+
       </div>
 
-      <!-- RIGHT PANEL (metrics) -->
+      <!-- RIGHT PANEL -->
       <aside id="right-panel">
 
-        <!-- REAL-TIME METRICS -->
+        <!-- MÉTRICAS -->
         <section class="panel-section">
           <h3 class="section-title">📊 Métricas</h3>
           <div class="metric-grid">
@@ -235,7 +239,7 @@
               <div class="metric-label">En frustum</div>
             </div>
           </div>
-          <!-- Tiempo de simulación y acumulado -->
+          <!-- Tiempo simulado (Sprint 5) -->
           <div class="metric-sim-time">
             <span class="metric-label">Tiempo simulado</span>
             <span class="metric-value" id="m-sim-time" style="font-size:14px">0.0s</span>
@@ -248,18 +252,19 @@
           <canvas id="fps-graph" width="220" height="80"></canvas>
         </section>
 
-        <!-- COLLISION PIPELINE -->
+        <!-- PIPELINE GRAPH -->
         <section class="panel-section">
           <h3 class="section-title">🔬 Pipeline colisiones</h3>
           <canvas id="pipeline-graph" width="220" height="80"></canvas>
         </section>
-        <!-- ACCUMULATED METRICS GRAPH -->
+
+        <!-- COLISIONES ACUMULADAS (Sprint 5) -->
         <section class="panel-section">
           <h3 class="section-title">📉 Colisiones acumuladas</h3>
           <canvas id="collisions-graph" width="220" height="80"></canvas>
         </section>
 
-        <!-- PRESETS DE CAPAS -->
+        <!-- PRESETS DE CAPAS (Sprint 5) -->
         <section class="panel-section">
           <h3 class="section-title">🎨 Presets de capas</h3>
           <div class="template-row">
@@ -269,7 +274,8 @@
             <button class="btn-template" id="preset-none">Nada</button>
           </div>
         </section>
-        <!-- SELECTED ROBOT -->
+
+        <!-- ROBOT SELECCIONADO -->
         <section class="panel-section">
           <h3 class="section-title">🤖 Robot seleccionado</h3>
           <div id="robot-info">
@@ -277,13 +283,13 @@
           </div>
         </section>
 
-        <!-- MATRIX DISPLAY -->
+        <!-- MATRIZ T·R -->
         <section class="panel-section" id="matrix-panel" style="display:none">
           <h3 class="section-title">🔢 Matriz T·R</h3>
           <pre id="matrix-display" class="matrix-pre"></pre>
         </section>
 
-        <!-- REPLAN LOG -->
+        <!-- LOG REPLANIFICACIÓN -->
         <section class="panel-section">
           <h3 class="section-title">📋 Log replanificación</h3>
           <div id="replan-log" class="log-container"></div>
@@ -301,7 +307,7 @@
     </div>
   </div>
 
-  <!-- Scripts — order matters -->
+  <!-- Scripts — el orden importa -->
   <script src="src/core/OccupancyMap.js"></script>
   <script src="src/core/Robot.js"></script>
   <script src="src/core/SpatialGrid.js"></script>

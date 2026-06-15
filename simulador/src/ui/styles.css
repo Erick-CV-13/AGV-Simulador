@@ -330,27 +330,43 @@ canvas {
   pointer-events: none; display: none;
 }
 
-/* ── SPRINT 5 ── */
-#viewport-container.layout-1 { }
-#viewport-container.layout-2 { }
+/* ── Sprint 5/6 ──────────────────────────────────────────────────────────── */
+
+/* Layouts del viewport-container */
+#viewport-container.layout-1 {}
+
+#viewport-container.layout-2 {
+  display: flex;
+}
+
 #viewport-container.layout-4 {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
 }
 
+/* Divisor vertical entre botones de la barra inferior */
 .vp-divider {
-  width: 1px; height: 20px;
+  width: 1px;
+  height: 20px;
   background: var(--border);
   margin: 0 4px;
+  flex-shrink: 0;
 }
 
+/* Tiempo simulado en panel de métricas */
 .metric-sim-time {
-  display: flex; justify-content: space-between; align-items: center;
-  margin-top: 8px; padding-top: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+  padding-top: 8px;
   border-top: 1px solid var(--border);
 }
 
-#btn-export-png, #btn-export-config {
-  padding: 4px 8px; font-size: 11px;
+/* Botones de exportación en barra inferior */
+#btn-export-png,
+#btn-export-config {
+  padding: 4px 8px;
+  font-size: 11px;
 }
