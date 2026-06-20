@@ -558,7 +558,6 @@ class Simulation {
       const info = document.getElementById('astar-step-info');
       if (st.done) {
         clearInterval(this._astarStepInterval);
-        this.state.astarStepMode = false;
         info.textContent = st.resultPath
           ? `✓ Ruta encontrada: ${st.resultPath.length} pasos`
           : '✗ Sin ruta';
