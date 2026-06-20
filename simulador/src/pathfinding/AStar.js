@@ -180,25 +180,23 @@ class AStar {
   drawStepState(ctx, map) {
     const st = this.stepState;
     if (!st) return;
-    const s = 1 / map.scale;
-    const cs = 1;  // tamaño celda en px (1:1)
 
     ctx.save();
     // Closed set — gris
     ctx.fillStyle = 'rgba(100,110,140,0.35)';
     for (const k of st.closedSet) {
       const [x, y] = k.split(',').map(Number);
-      ctx.fillRect(x * cs * s - cs * s * 0.4, y * cs * s - cs * s * 0.4, cs * s * 0.8, cs * s * 0.8);
+      ctx.fillRect(x - 0.4, y - 0.4, 0.8, 0.8);
     }
     // Open set — amarillo
     ctx.fillStyle = 'rgba(255,212,71,0.35)';
     for (const node of st.openSet) {
-      ctx.fillRect(node.px * s - s * 0.4, node.py * s - s * 0.4, s * 0.8, s * 0.8);
+      ctx.fillRect(node.px - 0.4, node.py - 0.4, 0.8, 0.8);
     }
     // Nodo actual — naranja
     if (st.current) {
       ctx.fillStyle = 'rgba(255,124,42,0.8)';
-      ctx.fillRect(st.current.px * s - s * 0.5, st.current.py * s - s * 0.5, s, s);
+      ctx.fillRect(st.current.px - 0.5, st.current.py - 0.5, 1, 1);
     }
     // Ruta encontrada — verde
     if (st.resultPath) {
