@@ -167,7 +167,12 @@ class UI {
 
   /** Convierte un id HTML tipo 'show-aabb' al nombre de propiedad 'showAABB'. */
   _layerId(htmlId) {
-    return htmlId.replace(/-([a-z])/g, (_, c) => c.toUpperCase());
+    const map = {
+      'show-aabb': 'showAABB',
+      'show-obb': 'showOBB',
+      'show-mtv': 'showMTV'
+    };
+    return map[htmlId] || htmlId.replace(/-([a-z])/g, (_, c) => c.toUpperCase());
   }
 
   // ─── Viewports ────────────────────────────────────────────────────────────
